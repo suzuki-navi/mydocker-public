@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ -t 1 ]; then
+    git diff --no-index "$@"
+else
+    diff -u "$@"
+fi
+

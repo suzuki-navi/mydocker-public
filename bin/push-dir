@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -Ceu
+
+bucket_name="suzuki-navi-archive"
+bucket_prefix="backup/mydocker"
+
+function push_dir() {
+    local target=$1
+    echo -n "push $target..."
+    local s3_key="${bucket_prefix}/$target.tar.gz"
+    echo
+}
+
+for d in $(ls $HOME/pj); do
+  push_dir $d
+done
+
+

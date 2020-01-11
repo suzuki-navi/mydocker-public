@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -Ceu
+
+bash $HOME/.mydocker/lib/sync-private.sh
+bash $HOME/.mydocker/lib/pack-credentials.sh
+
