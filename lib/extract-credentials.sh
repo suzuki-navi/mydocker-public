@@ -6,8 +6,9 @@ chmod 700 $HOME/.mydocker/credentials
 
 if [ ! -e $HOME/.mydocker/var/credentials.txt ]; then
     echo "Not found: $HOME/.mydocker/var/credentials.txt."
-    echo "Input credential:"
-    cat > $HOME/.mydocker/var/credentials.txt
+    echo -n "Input credential: "
+    read line
+    echo "$line" > $HOME/.mydocker/var/credentials.txt
 fi
 
 (
