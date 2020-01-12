@@ -3,7 +3,7 @@
 set -Ceu
 
 while [ "$#" != 0 ]; do
-    bash $HOME/.mydocker/lib/push-dir-to-s3.sh $1
+    bash $HOME/.mydocker/lib/pull-dir-from-s3.sh $1
     shift
 done
 

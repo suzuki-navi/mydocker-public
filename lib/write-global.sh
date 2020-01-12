@@ -12,7 +12,7 @@ if [ -e .ssh/known_hosts -a -e $HOME/.ssh/known_hosts ]; then
     # .ssh/known_hosts は下でカレントディレクトリから $HOME にコピーするので、
     # ここではマージしたものをいったんカレントディレクトリに書き出す
     bash $HOME/.mydocker/lib/merge-known-hosts.sh .ssh/known_hosts $HOME/.mydocker/var/known_hosts >| $HOME/.mydocker/var/known_hosts
-    if ! diff $HOME/.mydocker/var/known_hosts .ssh/known_hosts >/dev/null; then
+    if ! cmp -s $HOME/.mydocker/var/known_hosts .ssh/known_hosts; then
         cp $HOME/.mydocker/var/known_hosts .ssh/known_hosts
     fi
 fi

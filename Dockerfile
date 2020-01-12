@@ -14,6 +14,16 @@ ENV HOME=/home/${USER}
 WORKDIR $HOME
 USER ${USER}
 
+RUN sudo apt install -y locales-all
+# perlで以下のwarningが出てしまうのを防ぐため
+# perl: warning: Setting locale failed.
+# perl: warning: Please check that your locale settings:
+#         LANGUAGE = (unset),
+#         LC_ALL = (unset),
+#         LANG = "en_US.UTF-8"
+#     are supported and installed on your system.
+# perl: warning: Falling back to the standard locale ("C").
+
 # python
 RUN sudo apt install -y zlib1g-dev libffi-dev libssl-dev libsqlite3-dev libbz2-dev groff-base
 RUN git clone git://github.com/pyenv/pyenv.git $HOME/.pyenv

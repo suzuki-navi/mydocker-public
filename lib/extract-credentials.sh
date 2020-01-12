@@ -18,6 +18,13 @@ fi
 )
 
 (
+    find $HOME/.mydocker/credentials -type f | LC_ALL=C sort | while read path; do
+        echo $path
+        cat $path
+    done
+) > $HOME/.mydocker/var/credentnials.raw.txt
+
+(
     cd $HOME/.mydocker/credentials
     bash $HOME/.mydocker/lib/write-global.sh credential-sync
 )

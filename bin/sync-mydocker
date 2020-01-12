@@ -2,6 +2,17 @@
 
 set -Ceu
 
+if [ -e $HOME/.mydocker/var/archive ]; then (
+    cd $HOME/.mydocker/var/archive
+    ls | perl -nle '/^(.+)\.tar\.gz\.[0-9]+$/ and print $1'
+) fi | LC_ALL=C sort | LC_ALL=C uniq | while read name; do
+    if [ -e $HOME/$name ]; then
+        echo '################################################################################'
+        echo "# $name"
+        bash $HOME/.mydocker/lib/push-dir-to-s3.sh $name
+    fi
+done
+
 echo '################################################################################'
 echo '# private'
 bash $HOME/.mydocker/lib/sync-private.sh
@@ -11,4 +22,5 @@ echo '# credentials'
 bash $HOME/.mydocker/lib/pack-credentials.sh
 
 echo '################################################################################'
+
 
