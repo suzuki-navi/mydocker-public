@@ -14,12 +14,12 @@ bash $HOME/.mydocker/lib/sync-private.sh
 sudo /usr/sbin/sshd
 
 if [ "$*" = "zsh" ]; then
-    r=1
-    while [ $r != 0 ]; do
+    zsh
+    $HOME/.mydocker/bin/sync-mydocker
+    r=$?
+    if [ $r != 0 ]; then
         zsh
-        $HOME/.mydocker/bin/sync-mydocker
-        r=$?
-    done
+    fi
 elif [ "$#" != 0 ]; then
     "$@"
 fi
