@@ -41,7 +41,7 @@ RUN pip install awscli
 
 # 試行錯誤中
 
-RUN sudo apt install -y zip
+RUN sudo apt install -y zip ncat
 
 ADD var/.gitignore $HOME/.mydocker/var/.gitignore
 ADD .gitignore     $HOME/.mydocker/.gitignore

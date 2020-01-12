@@ -9,3 +9,7 @@ if [ -e $HOME/.mydocker/private/.zshenv ]; then
     source $HOME/.mydocker/private/.zshenv
 fi
 
+if [ -e $HOME/.mydocker/private2/.zshenv ]; then
+    source $HOME/.mydocker/private2/.zshenv
+fi
+
