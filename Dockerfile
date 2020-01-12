@@ -28,7 +28,7 @@ RUN sudo apt install -y locales-all
 
 # python
 RUN sudo apt install -y zlib1g-dev libffi-dev libssl-dev libsqlite3-dev libbz2-dev groff-base
-RUN git clone git://github.com/pyenv/pyenv.git $HOME/.pyenv
+RUN git clone https://github.com/pyenv/pyenv.git $HOME/.pyenv
 ENV PYENV_ROOT=$HOME/.pyenv
 ENV PATH=$PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
 RUN pyenv install --skip-existing -v 3.8.1

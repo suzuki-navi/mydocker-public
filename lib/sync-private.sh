@@ -1,7 +1,9 @@
 
 set -Ceu
 
-repos=$(bash $HOME/.mydocker/lib/read-config.sh repos)
+####################################################################################################
+
+repos=$(bash $HOME/.mydocker/lib/read-config.sh private-repos)
 
 if [ -z "$repos" ]; then
     echo "Illegal ~/.mydocker/credentials/config" >&2
@@ -49,4 +51,39 @@ if [ -e $HOME/.mydocker/private/.git ]; then (
     cd $HOME/.mydocker/private
     bash $HOME/.mydocker/lib/write-global.sh private-sync
 )
+
+####################################################################################################
+
+repos=$(bash $HOME/.mydocker/lib/read-config.sh private2-repos)
+branch=$(bash $HOME/.mydocker/lib/read-config.sh private2-branch)
+
+if [ -z "$repos" ]; then
+    exit
+fi
+if [ -z "$branch" ]; then
+    branch=master
+fi
+
+mkdir -p $HOME/.mydocker/private2
+
+if [ -e $HOME/.mydocker/private2/.git ]; then (
+    cd $HOME/.mydocker/private2
+
+    bash $HOME/.mydocker/lib/read-global.sh private2-sync
+
+    bash $HOME/.mydocker/lib/autocommit.sh
+); else (
+    cd $HOME/.mydocker/private2
+
+    git clone $repos .
+    git checkout $branch
+
+); fi
+
+(
+    cd $HOME/.mydocker/private2
+    bash $HOME/.mydocker/lib/write-global.sh private2-sync
+)
+
+####################################################################################################
 

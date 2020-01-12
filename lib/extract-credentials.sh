@@ -22,7 +22,7 @@ fi
         echo $path
         cat $path
     done
-) > $HOME/.mydocker/var/credentnials.raw.txt
+) > $HOME/.mydocker/var/credentials.raw.txt
 
 (
     cd $HOME/.mydocker/credentials
