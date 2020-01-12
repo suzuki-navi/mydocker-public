@@ -3,11 +3,13 @@ FROM ubuntu:19.10
 RUN echo v1
 RUN apt update
 
-RUN apt install -y sudo zsh git gcc make curl less vim
+RUN apt install -y sudo zsh openssh-client openssh-server git gcc make curl less vim docker docker.io
+RUN mkdir /run/sshd
 
 ARG UID=9801
 ARG USER=mydocker
-RUN useradd -m -u ${UID} --groups sudo ${USER}
+RUN useradd -m -u ${UID} --groups sudo --shell /usr/bin/zsh ${USER}
+RUN addgroup ${USER} docker
 RUN echo '%sudo ALL=NOPASSWD: ALL' >> /etc/sudoers
 ENV HOME=/home/${USER}
 
@@ -37,12 +39,17 @@ RUN pip install --upgrade pip
 # awscli
 RUN pip install awscli
 
+# 試行錯誤中
+
+RUN sudo apt install -y zip
+
 ADD var/.gitignore $HOME/.mydocker/var/.gitignore
 ADD .gitignore     $HOME/.mydocker/.gitignore
 ADD Dockerfile     $HOME/.mydocker/Dockerfile
 ADD .zshenv        $HOME/.mydocker/.zshenv
 ADD .zshrc         $HOME/.mydocker/.zshrc
 ADD bin/           $HOME/.mydocker/bin/
+ADD etc/           $HOME/.mydocker/etc/
 ADD lib/           $HOME/.mydocker/lib/
 ADD .git/          $HOME/.mydocker/.git/
 
@@ -55,5 +62,5 @@ RUN ln -s $HOME/.mydocker/.zshrc  $HOME/.zshrc
 RUN ln -s $HOME/.mydocker/bin     $HOME/bin
 
 #CMD /usr/bin/zsh
-CMD bash $HOME/.mydocker/lib/startup.sh
+CMD bash $HOME/.mydocker/lib/startup.sh zsh
 

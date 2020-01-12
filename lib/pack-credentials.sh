@@ -2,14 +2,19 @@
 set -Ceu
 
 (
+    cd $HOME/.mydocker/credentials
+    bash $HOME/.mydocker/lib/read-global.sh credential-sync
+)
+
+(
     find $HOME/.mydocker/credentials -type f | LC_ALL=C sort | while read path; do
         echo $path
         cat $path
     done
-) > $HOME/.mydocker/var/credentnials.raw.txt.1
+) >| $HOME/.mydocker/var/credentnials.raw.txt.1
 
 if ! cmp -s $HOME/.mydocker/var/credentnials.raw.txt $HOME/.mydocker/var/credentnials.raw.txt.1; then (
-    diff -u $HOME/.mydocker/var/credentnials.raw.txt $HOME/.mydocker/var/credentnials.raw.txt.1
+    diff -u $HOME/.mydocker/var/credentnials.raw.txt $HOME/.mydocker/var/credentnials.raw.txt.1 || true
 
     cd $HOME/.mydocker/credentials
 

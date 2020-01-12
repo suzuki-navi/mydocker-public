@@ -17,13 +17,6 @@ if [ -e .ssh/known_hosts -a -e $HOME/.ssh/known_hosts ]; then
     fi
 fi
 
-if [ -e .zsh_history ]; then
-    # .zsh_history をマージしたものを $HOME に書き出す
-    cp .zsh_history $HOME/.mydocker/var/.zsh_history
-    diff -u .zsh_history $HOME/.zsh_history | grep -E -e '^\+' | cut -b2- >> $HOME/.mydocker/var/.zsh_history
-    cp $HOME/.mydocker/var/.zsh_history $HOME/.zsh_history
-fi
-
 targets='.ssh .aws'
 for f in $(find $targets -type f); do
     d=$(dirname $HOME/$f)
