@@ -25,7 +25,7 @@ sudo /usr/sbin/sshd
 
 if [ "$*" = "zsh" ]; then
     zsh
-    $HOME/.mydocker/bin/sync-mydocker
+    zsh -c "$HOME/.mydocker/bin/sync-mydocker"
     r=$?
     if [ $r != 0 ]; then
         echo "sync-mydocker failed!"
