@@ -41,7 +41,7 @@ RUN pip install awscli
 
 # 試行錯誤中
 
-RUN sudo apt install -y zip ncat postgresql-client-11
+RUN sudo apt install -y zip postgresql-client-11 ncat dnsutils iputils-ping
 
 ADD var/.gitignore $HOME/.mydocker/var/.gitignore
 ADD .gitignore     $HOME/.mydocker/.gitignore
