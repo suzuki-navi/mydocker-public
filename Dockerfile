@@ -37,7 +37,7 @@ RUN pip install --upgrade pip
 #RUN pip install pipenv
 
 # awscli
-RUN pip install awscli
+RUN pip install awscli awslogs
 
 # 試行錯誤中
 
