@@ -24,6 +24,7 @@ fi
 
 next_last_num=0001
 
+mkdir -p $HOME/.mydocker/var/archive
 (
     find $HOME/$name -type f | LC_ALL=C sort | while read path; do
         echo $path

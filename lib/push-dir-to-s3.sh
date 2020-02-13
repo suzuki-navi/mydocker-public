@@ -19,14 +19,14 @@ s3_archive_prefix=$(bash $HOME/.mydocker/lib/read-config.sh s3_archive_prefix)
 s3_last_ls_line=$(aws s3 ls s3://$s3_archive_bucket/$s3_archive_prefix/$name.tar.gz. | LC_ALL=C sort | tail -n1)
 if [ -z "$s3_last_ls_line" ]; then
     echo "Not found: s3://$s3_archive_bucket/$s3_archive_prefix/$name.tar.gz" >&2
-    exit 1
+    bash $HOME/.mydocker/lib/push-newdir-to-s3.sh $name
+    exit $?
 fi
 s3_last_fname=$(echo "$s3_last_ls_line" | awk '{print $4}')
 s3_last_num=$(echo "$s3_last_fname" | sed -E -e 's/^.+\.tar\.gz\.([0-9]+)$/\1/')
 if [ -z "$s3_last_num" ]; then
     echo "Not found: s3://$s3_archive_bucket/$s3_archive_prefix/$name.tar.gz" >&2
-    bash $HOME/.mydocker/lib/push-newdir-to-s3.sh $name
-    exit
+    exit 1
 fi
 
 if [ ! -e $HOME/.mydocker/var/archive/$name.tar.gz.$s3_last_num ]; then
