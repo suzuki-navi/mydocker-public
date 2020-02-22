@@ -41,7 +41,7 @@ RUN pip install awscli awslogs
 
 # 試行錯誤中
 
-RUN sudo apt install -y zip postgresql-client-11 ncat dnsutils iputils-ping jq
+RUN sudo apt install -y zip postgresql-client-11 ncat dnsutils iputils-ping jq tmux
 
 ADD var/.gitignore $HOME/.mydocker/var/.gitignore
 ADD .gitignore     $HOME/.mydocker/.gitignore
