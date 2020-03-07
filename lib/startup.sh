@@ -13,11 +13,12 @@ touch $HOME/.mydocker/var/config
 
 bash $HOME/.mydocker/lib/extract-credentials.sh
 
-echo -n "Input private2 branch: "
-read branch_name
-if [ -n "$branch_name" ]; then
-    echo "private2-branch:${branch_name}" >> $HOME/.mydocker/var/config
+echo -n "Input private branch: "
+read branch
+if [ -z "$branch" ]; then
+    branch=master
 fi
+echo "private-branch:${branch}" >> $HOME/.mydocker/var/config
 
 bash $HOME/.mydocker/lib/sync-private.sh
 

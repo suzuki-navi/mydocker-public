@@ -1,21 +1,23 @@
 
 set -Ceu
 
-sync_config_name=$1
-
 if [ ! -e $HOME/.ssh ]; then
     mkdir -p $HOME/.ssh
     chmod 700 $HOME/.ssh
 fi
 
 targets='.ssh .aws'
-for f in $(find $targets -type f); do
-    if [ $f != ".ssh/known_hosts" ]; then
-        d=$(dirname $HOME/$f)
-        if [ ! -e $d ]; then
-            mkdir -p $d;
-        fi
-        cp --preserve=mode,timestamp -vf $f $HOME/$f
+for d in .ssh .aws; do
+    if [ -e $d ]; then
+        for f in $(find $d -type f); do
+            if [ $f != ".ssh/known_hosts" ]; then
+                d=$(dirname $HOME/$f)
+                if [ ! -e $d ]; then
+                    mkdir -p $d;
+                fi
+                cp --preserve=mode,timestamp -vf $f $HOME/$f
+            fi
+        done
     fi
 done
 

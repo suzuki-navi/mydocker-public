@@ -4,6 +4,7 @@ set -Ceu
 ####################################################################################################
 
 repos=$(bash $HOME/.mydocker/lib/read-config.sh private-repos)
+branch=$(bash $HOME/.mydocker/lib/read-config.sh private-branch)
 
 if [ -z "$repos" ]; then
     echo "Illegal ~/.mydocker/credentials/config" >&2
@@ -15,7 +16,7 @@ mkdir -p $HOME/.mydocker/private
 if [ -e $HOME/.mydocker/private/.git ]; then (
     cd $HOME/.mydocker/private
 
-    bash $HOME/.mydocker/lib/read-global.sh private-sync
+    bash $HOME/.mydocker/lib/read-global.sh
 ); else (
     cd $HOME/.mydocker/private
 
@@ -34,45 +35,33 @@ if [ -e $HOME/.mydocker/private/.git ]; then (
         cp $HOME/.mydocker/var/known_hosts /md/etc/known_hosts
         rm $HOME/.ssh/known_hosts
     fi
+
+    # 最初にgit cloneするときに自動生成される .gitconfig を削除
+    rm $HOME/.gitconfig
+
+    if [ -e $HOME/.mydocker/private/branch-$branch ]; then
+        ln -sv $HOME/.mydocker/private/branch-$branch $HOME/.mydocker/var/branch
+    else
+        echo "Not found: $HOME/.mydocker/private/branch-$branch"
+    fi
 ); fi
 
 (
     cd $HOME/.mydocker/private
-    bash $HOME/.mydocker/lib/write-global.sh private-sync
+    bash $HOME/.mydocker/lib/write-global.sh
 )
 
 ####################################################################################################
 
-repos=$(bash $HOME/.mydocker/lib/read-config.sh private2-repos)
-branch=$(bash $HOME/.mydocker/lib/read-config.sh private2-branch)
+if [ -e $HOME/.mydocker/private/branch-$branch ]; then (
+    cd $HOME/.mydocker/private/branch-$branch
 
-if [ -z "$repos" ]; then
-    exit
-fi
-if [ -z "$branch" ]; then
-    branch=master
-fi
-
-mkdir -p $HOME/.mydocker/private2
-
-if [ -e $HOME/.mydocker/private2/.git ]; then (
-    cd $HOME/.mydocker/private2
-
-    bash $HOME/.mydocker/lib/read-global.sh private2-sync
+    bash $HOME/.mydocker/lib/read-global.sh
 
     bash $HOME/.mydocker/lib/autocommit.sh
-); else (
-    cd $HOME/.mydocker/private2
 
-    git clone $repos .
-    git checkout $branch
-
+    bash $HOME/.mydocker/lib/write-global.sh
 ); fi
-
-(
-    cd $HOME/.mydocker/private2
-    bash $HOME/.mydocker/lib/write-global.sh private2-sync
-)
 
 ####################################################################################################
 

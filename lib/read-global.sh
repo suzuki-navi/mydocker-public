@@ -1,14 +1,16 @@
 
 set -Ceu
 
-sync_config_name=$1
-
 targets='.ssh .aws'
-for f in $(find $targets -type f); do
-    if [ $f != ".ssh/known_hosts" ]; then
-       if [ -e $HOME/$f ]; then
-           cp --preserve=mode,timestamp -vf $HOME/$f $f
-       fi
+for d in $targets; do
+    if [ -e $d ]; then
+        for f in $(find $d -type f); do
+            if [ $f != ".ssh/known_hosts" ]; then
+               if [ -e $HOME/$f ]; then
+                   cp --preserve=mode,timestamp -vf $HOME/$f $f
+               fi
+            fi
+        done
     fi
 done
 

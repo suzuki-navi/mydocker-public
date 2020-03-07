@@ -27,14 +27,6 @@ if [ -e $HOME/.mydocker/private/config ]; then
     fi
 fi
 
-if [ -e $HOME/.mydocker/private2/config ]; then
-    value=$(cat $HOME/.mydocker/private2/config | sed -n -E -e "/^$name:/p" | sed -e "s/^$name://")
-    if [ -n "$value" ]; then
-        echo "$value"
-        exit
-    fi
-fi
-
 echo ""
 exit
 
