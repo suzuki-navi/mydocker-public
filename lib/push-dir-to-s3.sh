@@ -39,9 +39,10 @@ next_last_num=$(printf "%04d" $(expr $s3_last_num + 1))
 (
     find $HOME/$name -type f | LC_ALL=C sort | while read path; do
         echo $path
-        cat $path
+        cat $path | sha1sum | cut -b-40
     done
-) | sha1sum | cut -b-40 >| $HOME/.mydocker/var/archive/$name.tar.gz.$next_last_num.hash
+) >| $HOME/.mydocker/var/archive/$name.tar.gz.$next_last_num.hash.txt
+cat $HOME/.mydocker/var/archive/$name.tar.gz.$next_last_num.hash.txt | sha1sum | cut -b-40 >| $HOME/.mydocker/var/archive/$name.tar.gz.$next_last_num.hash
 
 if cmp -s $HOME/.mydocker/var/archive/$name.tar.gz.$s3_last_num.hash $HOME/.mydocker/var/archive/$name.tar.gz.$next_last_num.hash; then
    echo "No changes"
