@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -Ceu
+
+bash $HOME/.mydocker/lib/ll-dir-s3.sh
+
+

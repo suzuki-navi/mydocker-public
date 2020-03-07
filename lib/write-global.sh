@@ -7,7 +7,7 @@ if [ ! -e $HOME/.ssh ]; then
 fi
 
 targets='.ssh .aws'
-for d in .ssh .aws; do
+for d in $targets; do
     if [ -e $d ]; then
         for f in $(find $d -type f); do
             if [ $f != ".ssh/known_hosts" ]; then
