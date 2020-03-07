@@ -6,7 +6,8 @@ ARG HTTPS_PROXY=
 RUN echo v2
 RUN apt update
 
-RUN apt install -y sudo zsh openssh-client openssh-server git gcc make curl less vim docker docker.io
+RUN apt install -y sudo moreutils zsh git gcc make curl less zip vim ncat dnsutils iputils-ping jq tmux
+RUN apt install -y openssh-client openssh-server postgresql-client-11 docker docker.io
 RUN mkdir /run/sshd
 
 ARG UID=9801
@@ -46,10 +47,6 @@ RUN pip install --upgrade pip
 
 # awscli
 RUN pip install awscli awslogs
-
-# 試行錯誤中
-
-RUN sudo apt install -y zip postgresql-client-11 ncat dnsutils iputils-ping jq tmux moreutils
 
 ADD var/.gitignore $HOME/.mydocker/var/.gitignore
 ADD .gitignore     $HOME/.mydocker/.gitignore
