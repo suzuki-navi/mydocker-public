@@ -1,6 +1,9 @@
 FROM ubuntu:19.10
 
-RUN echo v1
+ARG HTTP_PROXY=
+ARG HTTPS_PROXY=
+
+RUN echo v2
 RUN apt update
 
 RUN apt install -y sudo zsh openssh-client openssh-server git gcc make curl less vim docker docker.io
@@ -15,6 +18,11 @@ ENV HOME=/home/${USER}
 
 WORKDIR $HOME
 USER ${USER}
+
+ENV HTTP_PROXY=$HTTP_PROXY
+ENV HTTPS_PROXY=$HTTPS_PROXY
+RUN git config --global http.proxy "$HTTP_PROXY"
+RUN git config --global https.proxy "$HTTPS_PROXY"
 
 RUN sudo apt install -y locales-all
 # perlで以下のwarningが出てしまうのを防ぐため
