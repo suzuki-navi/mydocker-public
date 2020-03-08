@@ -1,5 +1,5 @@
 
-export PATH=$HOME/bin:$PATH
+export PATH=$HOME/bin2:$HOME/bin:$PATH
 
 if [ -e $HOME/.pyenv/shims ]; then
     PATH="$HOME/.pyenv/shims:$HOME/.pyenv/bin":$PATH

@@ -48,6 +48,8 @@ RUN pip install --upgrade pip
 # awscli
 RUN pip install awscli awslogs
 
+RUN mkdir $HOME/bin2
+
 ADD var/.gitignore $HOME/.mydocker/var/.gitignore
 ADD .gitignore     $HOME/.mydocker/.gitignore
 ADD Dockerfile     $HOME/.mydocker/Dockerfile
@@ -56,6 +58,7 @@ ADD .zshrc         $HOME/.mydocker/.zshrc
 ADD bin/           $HOME/.mydocker/bin/
 ADD etc/           $HOME/.mydocker/etc/
 ADD lib/           $HOME/.mydocker/lib/
+ADD setup/         $HOME/.mydocker/setup/
 ADD .git/          $HOME/.mydocker/.git/
 
 USER root
