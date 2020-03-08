@@ -67,5 +67,7 @@ RUN ln -s $HOME/.mydocker/.zshrc  $HOME/.zshrc
 RUN ln -s $HOME/.mydocker/bin     $HOME/bin
 
 #CMD /usr/bin/zsh
-CMD bash $HOME/.mydocker/lib/startup.sh zsh
+#CMD bash $HOME/.mydocker/lib/startup.sh zsh
+#ENTRYPOINT bash $HOME/.mydocker/lib/startup.sh
+ENTRYPOINT ["sh", "-c", "bash ${HOME}/.mydocker/lib/startup.sh $@", ""]
 

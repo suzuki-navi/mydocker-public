@@ -24,7 +24,7 @@ bash $HOME/.mydocker/lib/sync-private.sh
 
 sudo /usr/sbin/sshd
 
-if [ "$*" = "zsh" ]; then
+if [ "$*" = "zsh" -o "$*" = "" ]; then
     zsh
     zsh -c "$HOME/.mydocker/bin/sync-mydocker"
     r=$?
@@ -32,6 +32,10 @@ if [ "$*" = "zsh" ]; then
         echo "sync-mydocker failed!"
         zsh
     fi
+elif [ -n "$1" -a -e $HOME/.mydocker/var/branch/startup/$1.sh ]; then
+    bash $HOME/.mydocker/var/branch/startup/$1.sh
+elif [ -n "$1" -a -e $HOME/.mydocker/private/startup/$1.sh ]; then
+    bash $HOME/.mydocker/private/startup/$1.sh
 elif [ "$#" != 0 ]; then
     "$@"
 fi
