@@ -29,11 +29,6 @@ if [ -z "$s3_last_num" ]; then
     exit 1
 fi
 
-if [ ! -e $HOME/.mydocker/var/archive/$name.tar.gz.$s3_last_num ]; then
-    echo "Perhaps conflicted" >&2
-    exit 1
-fi
-
 next_last_num=$(printf "%04d" $(expr $s3_last_num + 1))
 
 (
@@ -47,6 +42,11 @@ cat $HOME/.mydocker/var/archive/$name.tar.gz.$next_last_num.hash.txt | sha1sum |
 if cmp -s $HOME/.mydocker/var/archive/$name.tar.gz.$s3_last_num.hash $HOME/.mydocker/var/archive/$name.tar.gz.$next_last_num.hash; then
    echo "No changes"
    exit 0
+fi
+
+if [ ! -e $HOME/.mydocker/var/archive/$name.tar.gz.$s3_last_num ]; then
+    echo "Perhaps conflicted" >&2
+    exit 1
 fi
 
 (
