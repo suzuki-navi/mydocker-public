@@ -60,7 +60,7 @@ ADD etc/           $HOME/.mydocker/etc/
 ADD lib/           $HOME/.mydocker/lib/
 ADD setup/         $HOME/.mydocker/setup/
 ADD .git/          $HOME/.mydocker/.git/
-ADD memo           $HOME/.mydocker/memo.txt
+ADD memo.md        $HOME/.mydocker/memo.md
 
 USER root
 RUN chown -R $USER:$USER $HOME/.mydocker
