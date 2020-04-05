@@ -62,6 +62,8 @@ ADD setup/         $HOME/.mydocker/setup/
 ADD .git/          $HOME/.mydocker/.git/
 ADD memo.md        $HOME/.mydocker/memo.md
 
+RUN mkdir $HOME/nobackup
+
 USER root
 RUN chown -R $USER:$USER $HOME/.mydocker
 USER ${USER}
