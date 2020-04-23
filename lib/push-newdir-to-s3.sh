@@ -31,7 +31,7 @@ mkdir -p $HOME/.mydocker/var/archive
         cat $path | sha1sum | cut -b-40
     done
 ) >| $HOME/.mydocker/var/archive/$name.tar.gz.$next_last_num.hash.txt
-cat $HOME/.mydocker/var/archive/$name.tar.gz.$next_last_num.hash | sha1sum | cut -b-40 >| $HOME/.mydocker/var/archive/$name.tar.gz.$next_last_num.hash
+cat $HOME/.mydocker/var/archive/$name.tar.gz.$next_last_num.hash.txt | sha1sum | cut -b-40 >| $HOME/.mydocker/var/archive/$name.tar.gz.$next_last_num.hash
 
 (
     cd $HOME

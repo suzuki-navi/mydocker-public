@@ -42,6 +42,6 @@ aws s3 cp s3://$s3_archive_bucket/$s3_archive_prefix/$name.tar.gz.$s3_last_num $
         echo $path
         cat $path | sha1sum | cut -b-40
     done
-) > $HOME/.mydocker/var/archive/$name.tar.gz.$s3_last_num.hash.txt
-cat $HOME/.mydocker/var/archive/$name.tar.gz.$s3_last_num.hash.txt | sha1sum | cut -b-40 > $HOME/.mydocker/var/archive/$name.tar.gz.$s3_last_num.hash
+) >| $HOME/.mydocker/var/archive/$name.tar.gz.$s3_last_num.hash.txt
+cat $HOME/.mydocker/var/archive/$name.tar.gz.$s3_last_num.hash.txt | sha1sum | cut -b-40 >| $HOME/.mydocker/var/archive/$name.tar.gz.$s3_last_num.hash
 
