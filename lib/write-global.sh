@@ -16,6 +16,7 @@ for d in $targets; do
                     mkdir -p $d;
                 fi
                 cp --preserve=mode,timestamp -vf $f $HOME/$f
+                chmod 600 $HOME/$f
             fi
         done
     fi
