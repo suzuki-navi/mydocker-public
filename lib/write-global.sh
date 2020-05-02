@@ -22,14 +22,19 @@ for d in $targets; do
     fi
 done
 
-# .ssh/known_hosts
-if [ -e .ssh/known_hosts ]; then
-    cp .ssh/known_hosts $HOME/.ssh/known_hosts
-fi
-
 # .gitconfig
 if [ -e .global-gitconfig ]; then
     cp --preserve=mode,timestamp -vf .global-gitconfig $HOME/.gitconfig
+fi
+
+# .mydocker/.git/config
+if [ -e mydocker-git/config ]; then
+    cp mydocker-git/config $HOME/.mydocker/.git/config
+fi
+
+# .ssh/known_hosts
+if [ -e .ssh/known_hosts ]; then
+    cp .ssh/known_hosts $HOME/.ssh/known_hosts
 fi
 
 # .zsh_history

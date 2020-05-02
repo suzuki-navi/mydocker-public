@@ -19,6 +19,11 @@ if [ -e .global-gitconfig -a -e $HOME/.gitconfig ]; then
     cp --preserve=mode,timestamp -vf $HOME/.gitconfig .global-gitconfig
 fi
 
+# .mydocker/.git/config
+if [ -e mydocker-git/config ]; then
+    cp --preserve=mode,timestamp -vf $HOME/.mydocker/.git/config mydocker-git/config
+fi
+
 if [ -e .git ]; then
     bash $HOME/.mydocker/lib/autocommit.sh
 fi
