@@ -50,6 +50,10 @@ RUN pip install awscli awslogs
 
 RUN mkdir $HOME/bin2
 
+# 以下、試行錯誤中
+RUN yes | sudo unminimize
+RUN sudo apt install -y man-db
+
 ADD var/.gitignore $HOME/.mydocker/var/.gitignore
 ADD .gitignore     $HOME/.mydocker/.gitignore
 ADD Dockerfile     $HOME/.mydocker/Dockerfile
