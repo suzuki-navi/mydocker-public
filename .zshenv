@@ -5,6 +5,10 @@ if [ -e $HOME/.pyenv/shims ]; then
     PATH="$HOME/.pyenv/shims:$HOME/.pyenv/bin":$PATH
 fi
 
+if [ -e $HOME/.rbenv/shims ]; then
+    PATH="$HOME/.rbenv/shims:$HOME/.rbenv/bin":$PATH
+fi
+
 if [ -e $HOME/.mydocker/private/.zshenv ]; then
     source $HOME/.mydocker/private/.zshenv
 fi
