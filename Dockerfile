@@ -45,6 +45,14 @@ RUN pyenv global 3.8.1
 RUN pip install --upgrade pip
 #RUN pip install pipenv
 
+# rbenv
+RUN git clone https://github.com/rbenv/rbenv.git $HOME/.rbenv
+RUN git clone https://github.com/rbenv/ruby-build.git $HOME/.rbenv/plugins/ruby-build
+ENV PATH=$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH
+RUN rbenv install --skip-existing -v 2.7.1
+RUN rbenv global 2.7.1
+RUN gem install bundler
+
 # awscli
 RUN pip install awscli awslogs
 
