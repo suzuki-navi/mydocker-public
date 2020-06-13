@@ -19,9 +19,14 @@ if [ -e .global-gitconfig -a -e $HOME/.gitconfig ]; then
     cp --preserve=mode,timestamp -vf $HOME/.gitconfig .global-gitconfig
 fi
 
-# .mydocker/.git/config
+# .git/config
 if [ -e mydocker-git/config ]; then
     cp --preserve=mode,timestamp -vf $HOME/.mydocker/.git/config mydocker-git/config
+fi
+
+# .tmux.conf
+if [ -e .tmux.conf ]; then
+    cp --preserve=mode,timestamp -vf $HOME/.tmux.conf .tmux.conf
 fi
 
 if [ -e .git ]; then

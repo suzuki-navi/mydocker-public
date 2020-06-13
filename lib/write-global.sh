@@ -27,10 +27,17 @@ if [ -e .global-gitconfig ]; then
     cp --preserve=mode,timestamp -vf .global-gitconfig $HOME/.gitconfig
 fi
 
-# .mydocker/.git/config
+# .git/config
 if [ -e mydocker-git/config ]; then
-    cp mydocker-git/config $HOME/.mydocker/.git/config
+    cp --preserve=mode,timestamp -vf mydocker-git/config $HOME/.mydocker/.git/config
 fi
+
+# .tmux.conf
+if [ -e .tmux.conf ]; then
+    cp --preserve=mode,timestamp -vf .tmux.conf $HOME/.tmux.conf
+fi
+
+# history
 
 # .ssh/known_hosts
 if [ -e .ssh/known_hosts ]; then
