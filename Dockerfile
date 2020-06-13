@@ -6,7 +6,7 @@ ARG HTTPS_PROXY=
 RUN echo v2
 RUN apt update
 
-RUN apt install -y sudo moreutils zsh git gcc make curl less zip vim ncat dnsutils iputils-ping jq tmux
+RUN apt install -y sudo moreutils zsh git gcc make curl less zip vim ncat dnsutils iputils-ping jq tmux tcpdump
 RUN apt install -y openssh-client openssh-server postgresql-client-11 docker docker.io
 RUN mkdir /run/sshd
 
